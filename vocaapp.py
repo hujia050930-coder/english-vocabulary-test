@@ -649,39 +649,6 @@ def show_results_page():
         st.metric("最终难度", f"Lv.{results['final_difficulty']}")
         st.caption(results['final_difficulty_name'])
     
-
-    # 各难度掌握度柱状图
-    st.markdown("---")
-    st.markdown("### 各难度等级掌握度")
-    
-    fig2, ax2 = plt.subplots(figsize=(10, 6))
-    
-    difficulties = list(range(1, 6))
-    mastery_levels = [results['difficulty_stats'][i]['accuracy'] for i in difficulties]
-    level_names = [DIFFICULTY_LEVELS[i]["name"] for i in difficulties]
-    level_colors = [DIFFICULTY_LEVELS[i]["color"] for i in difficulties]
-    
-    bars = ax2.bar(level_names, mastery_levels, color=level_colors, edgecolor='black', linewidth=1.5)
-    
-    ax2.set_ylabel('mastery degree (%)', fontsize=12)
-    ax2.set_ylim(0, 105)
-    ax2.set_title('VOCA mastery degree', fontsize=16, fontweight='bold', pad=20)
-    ax2.grid(axis='y', alpha=0.3, linestyle='--')
-    
-    # 在柱子上添加数值标签
-    for bar, value in zip(bars, mastery_levels):
-        height = bar.get_height()
-        ax2.text(
-            bar.get_x() + bar.get_width()/2., 
-            height + 1,
-            f'{value:.1f}%',
-            ha='center', 
-            va='bottom',
-            fontweight='bold',
-            fontsize=11
-        )
-    
-    st.pyplot(fig2)
     
     # 详细答题记录
     st.markdown("---")
